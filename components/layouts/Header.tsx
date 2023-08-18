@@ -9,12 +9,14 @@ import { cn } from "@/lib/utils";
 export default function Header() {
   const [userDropDown, setUserDropDown] = useState(false);
   useEffect(() => {
-  
+    console.log("userDropDown state:", userDropDown);
   }, [userDropDown]);
 
   function handleClick() {
-    setUserDropDown(prev => !prev); 
+    console.log("handleClick called");
+    setUserDropDown((prev) => !prev);
   }
+
   return (
     <React.Fragment>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -32,8 +34,9 @@ export default function Header() {
               type="button"
               className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
               id="user-menu-button"
-              aria-expanded="false"
+              aria-expanded={userDropDown}
               data-dropdown-toggle="user-dropdown"
+              onClick={handleClick}
               data-dropdown-placement="bottom"
             >
               <span className="sr-only">Open user menu</span>
@@ -46,7 +49,7 @@ export default function Header() {
             {/* <!-- Dropdown menu --> */}
             <div
               className={cn(
-                "z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600",
+                "z-50 my-4 text-base list-none absolute top-12 right-2 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600",
                 !userDropDown && "hidden"
               )}
               id="user-dropdown"
@@ -100,7 +103,6 @@ export default function Header() {
               className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="navbar-user"
               aria-expanded={userDropDown}
-              onClick={handleClick}
             >
               <span className="sr-only">Open main menu</span>
               <svg
