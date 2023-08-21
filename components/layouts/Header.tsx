@@ -1,33 +1,28 @@
 "use client";
 import { ThemeToggle } from "@/components/theme-toggle";
-import Logo from "@/assets/logo.png";
-
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { LanguageToggle } from "../LanguageToggle";
 import { cn } from "@/lib/utils";
+
+
 export default function Header() {
   const [userDropDown, setUserDropDown] = useState(false);
-  useEffect(() => {
-    console.log("userDropDown state:", userDropDown);
-  }, [userDropDown]);
+  useEffect(() => {}, [userDropDown]);
 
   function handleClick() {
-    console.log("handleClick called");
     setUserDropDown((prev) => !prev);
   }
 
   return (
     <React.Fragment>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
+      <nav className="backdrop-blur-sm bg-white/95 absolute top-0 right-0 w-full border-gray-200 dark:bg-gray-900 before:shadow-[-2px_3px_90px_-20px_rgb(0_0_0_/_25%)]">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <Link href="/" className="flex items-center">
-            <img src={Logo.src} className="h-8 mr-3" alt="Flowbite Logo" />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              AdsCrush
-            </span>
-          </Link>
-          <div className="flex items-center md:order-2 space-x-4">
+          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white w-1/2">
+            Your Manager
+          </span>
+
+          <div className="flex items-center md:order-2 space-x-4 ">
             <ThemeToggle />
             <LanguageToggle />
             <button
@@ -59,7 +54,7 @@ export default function Header() {
                   Bonnie Green
                 </span>
                 <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                  name@flowbite.com
+                  name@adscrush.com
                 </span>
               </div>
               <ul className="py-2" aria-labelledby="user-menu-button">

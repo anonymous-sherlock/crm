@@ -63,7 +63,6 @@ export function LanguageToggle() {
     });
   }
 
-  useEffect(() => {});
 
   return (
     <Form {...form}>

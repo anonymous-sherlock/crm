@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/layouts/Header";
+import Sidebar from "@/components/Sidebar";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,15 +18,25 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const session = await getServerSession(authOptions);
   return (
     <>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" suppressHydrationWarning className="antialiased">
         <head />
-        <body>
+        <body className="antialiased">
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Header />
-            {children}
+            {!session ? (
+              <Sidebar>
+                <Header />
+                {children}
+              </Sidebar>
+            ) : (
+              <>
+                <Header />
+                {children}
+              </>
+            )}
           </ThemeProvider>
         </body>
       </html>
